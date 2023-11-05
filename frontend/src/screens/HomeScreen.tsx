@@ -11,7 +11,7 @@ export default function HomeScreen() {
         <Text className='text-lg'>Home Screen</Text>
       </View>
 
-      <View style={{ backgroundColor: themeColors.bgColor() }}></View>
+      <View style={{ backgroundColor: themeColors.bg_main() }}></View>
     </SafeAreaView>
   );
 }
