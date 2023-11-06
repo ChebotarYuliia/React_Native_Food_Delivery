@@ -1,15 +1,13 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import WelcomeScreen from "./src/screens/WelcomeScreen";
-import SignupSrcreen from "./src/screens/SignupSrcreen";
-import LoginScreen from "./src/screens/LoginScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import WelcomeScreen from "../screens/WelcomeScreen";
+import SignupSrcreen from "../screens/SignupSrcreen";
+import LoginScreen from "../screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 
-export default function Navigation() {
+export default function AuthStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -18,7 +16,6 @@ export default function Navigation() {
         }}
         initialRouteName='Welcome'
       >
-        <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Welcome' component={WelcomeScreen} />
         <Stack.Screen name='Signup' component={SignupSrcreen} />
         <Stack.Screen name='Login' component={LoginScreen} />
@@ -26,5 +23,3 @@ export default function Navigation() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({});

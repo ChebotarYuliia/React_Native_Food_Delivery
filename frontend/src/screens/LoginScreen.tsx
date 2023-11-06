@@ -1,4 +1,11 @@
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,14 +14,43 @@ import InputWithLabel from "../components/form-elements/InputWithLabel";
 import SubmitButton from "../components/form-elements/SubmitButton";
 import EnterOption from "../components/form-elements/EnterOption";
 import EnterForm from "../components/form-elements/EnterForm";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
+import ErrorMessage from "../components/form-elements/ErrorMessage";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleEmailChange = (
+    v: NativeSyntheticEvent<TextInputChangeEventData> | string
+  ) => {
+    setEmail(v as string);
+    setError(null);
+  };
+
+  const handlePasswordChange = (
+    v: NativeSyntheticEvent<TextInputChangeEventData> | string
+  ) => {
+    setPassword(v as string);
+    setError(null);
+  };
 
   const signupHandler = () => {
     navigation.navigate("Signup" as never);
+  };
+
+  const handleLogin = async () => {
+    if (email && password) {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.log("CAN'T LOGIN: ", err);
+        setError("Email or password is incorrect! Try again");
+      }
+    }
   };
 
   return (
@@ -27,9 +63,11 @@ export default function LoginScreen() {
       }
     >
       <View className='form space-y-2'>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
         <InputWithLabel label='Email address'>
           <CustomTextInput
-            onChange={(v) => setEmail(v as string)}
+            onChange={handleEmailChange}
             value={email}
             placeholder='Enter your email'
           />
@@ -37,7 +75,7 @@ export default function LoginScreen() {
 
         <InputWithLabel label='Password'>
           <CustomTextInput
-            onChange={(v) => setPassword(v as string)}
+            onChange={handlePasswordChange}
             value={password}
             secureTextEntry
             placeholder='Enter your password'
@@ -49,7 +87,7 @@ export default function LoginScreen() {
         <Text className='text-gray-700 '>Forgot password?</Text>
       </TouchableOpacity>
 
-      <SubmitButton text='Login' />
+      <SubmitButton text='Login' onPress={handleLogin} />
 
       <EnterOption
         question="Don't have an account?"
