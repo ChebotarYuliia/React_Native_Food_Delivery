@@ -6,18 +6,18 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import EnterForm from "../components/form-elements/EnterForm";
 import InputWithLabel from "../components/form-elements/InputWithLabel";
 import CustomTextInput from "../components/form-elements/TextInput";
 import SubmitButton from "../components/form-elements/SubmitButton";
 import EnterOption from "../components/form-elements/EnterOption";
 import { useNavigation } from "@react-navigation/native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase";
 import ErrorMessage from "../components/form-elements/ErrorMessage";
+import { AuthContext, TAuthContext } from "../context/AuthProvider";
 
 export default function SignupSrcreen() {
+  const { signup } = useContext(AuthContext) as TAuthContext;
   const navigation = useNavigation();
   const [userName, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -52,12 +52,10 @@ export default function SignupSrcreen() {
 
   const handleSubmit = async () => {
     if (email && password) {
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } catch (err) {
-        setError("Cant sing up");
-        console.log("CAN'T SIGN UP: ", err);
-      }
+      const { error } = await signup(email, password, userName);
+      if (error) setError(error);
+    } else {
+      setError("Please enter your email and password");
     }
   };
 

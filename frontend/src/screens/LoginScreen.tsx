@@ -6,7 +6,7 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import CustomTextInput from "../components/form-elements/TextInput";
@@ -14,11 +14,11 @@ import InputWithLabel from "../components/form-elements/InputWithLabel";
 import SubmitButton from "../components/form-elements/SubmitButton";
 import EnterOption from "../components/form-elements/EnterOption";
 import EnterForm from "../components/form-elements/EnterForm";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase";
 import ErrorMessage from "../components/form-elements/ErrorMessage";
+import { AuthContext, TAuthContext } from "../context/AuthProvider";
 
 export default function LoginScreen() {
+  const { login } = useContext(AuthContext) as TAuthContext;
   const navigation = useNavigation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -44,12 +44,10 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (email && password) {
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-      } catch (err) {
-        console.log("CAN'T LOGIN: ", err);
-        setError("Email or password is incorrect! Try again");
-      }
+      const { error } = await login(email, password);
+      if (error) setError(error);
+    } else {
+      setError("Please enter your email and password");
     }
   };
 

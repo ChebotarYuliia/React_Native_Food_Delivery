@@ -1,18 +1,15 @@
 import { View, Text, StatusBar } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { themeColors } from "../theme";
 import SubmitButton from "../components/form-elements/SubmitButton";
-import { signOut } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { AuthContext, TAuthContext } from "../context/AuthProvider";
 
 export default function HomeScreen() {
+  const { logout } = useContext(AuthContext) as TAuthContext;
+
   const handleSignout = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.log("CANTT SING OUT: ", err);
-    }
+    logout();
   };
 
   return (
