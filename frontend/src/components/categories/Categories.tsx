@@ -13,12 +13,11 @@ export default function Categories({ children }: CategoriesProps) {
   }
 
   return (
-    <View className={"mt-6"}>
+    <View className={"mt-2"}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         className='overflow-visible'
-        contentContainerStyle={{ paddingHorizontal: 15 }}
       >
         {children}
       </ScrollView>

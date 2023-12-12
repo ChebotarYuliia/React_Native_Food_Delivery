@@ -23,34 +23,37 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView className='bg-white pb-10'>
+    <SafeAreaView className='bg-white pb-6'>
       <StatusBar barStyle={"dark-content"} />
-      <View className='flex items-center pt-4 pb-0 px-4 text-center'>
-        <Text className='text-lg'>Home Screen</Text>
-      </View>
 
       {/* <View style={{ backgroundColor: themeColors.bg_main() }}>
         <SubmitButton text='Sign out' onPress={handleSignout} />
       </View> */}
 
       {/* main */}
-      <ScrollView showsVerticalScrollIndicator={false} className='pb-10'>
-        <Categories>
-          {tempCategories.map((category) => (
-            <Category
-              onPress={setActiveCategory}
-              isActive={activeCategory === category.id}
-              {...category}
-              key={category.id}
-            />
-          ))}
-        </Categories>
-      </ScrollView>
-
       <ScrollView
         showsVerticalScrollIndicator={false}
-        className='flex-column gap-3 px-3 py-2'
+        className='flex-column gap-4 px-3'
       >
+        <View className='flex items-center pt-4 text-center'>
+          <Text className='text-lg'>Home Screen</Text>
+        </View>
+
+        <View className='pb-3'>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Categories>
+              {tempCategories.map((category) => (
+                <Category
+                  onPress={setActiveCategory}
+                  isActive={activeCategory === category.id}
+                  {...category}
+                  key={category.id}
+                />
+              ))}
+            </Categories>
+          </ScrollView>
+        </View>
+
         {tempRestaurantRows.map((row) => {
           const { restaurants, ...props } = row;
           if (restaurants.length) {

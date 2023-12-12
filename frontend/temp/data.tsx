@@ -69,38 +69,47 @@ export const tempRestaurants: RestaurantCardProps[] = [
     image: require("../assets/images/restaurants/1.jpg"),
     children: "Papa Johns",
     category: "Pizzeria",
-    address: "",
+    address: "5th Ave",
     rating: 4.55,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, qui",
   },
   {
     id: 2,
     image: require("../assets/images/restaurants/2.jpg"),
     children: "Istanbul",
     category: "Fast food",
-    address: "",
+    address: "4th Ave",
     rating: 3.7,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
     id: 3,
     image: require("../assets/images/restaurants/3.jpg"),
     children: "Pan Asia",
     category: "Asian",
-    address: "",
+    address: "1st Ave",
     rating: 4.25,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
   },
   {
     id: 4,
     image: require("../assets/images/restaurants/4.png"),
     children: "McDonalds",
     category: "Fast food",
-    address: "",
+    address: "2d Ave",
     rating: 5,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
     id: 5,
     children: "Intourist",
     category: "Reastaurant",
-    address: "",
+    address: "6th Ave",
     rating: 4,
+    description: "",
   },
 ];

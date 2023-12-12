@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import useAuth from "../hooks/useAuth";
 import UserStack from "./UserStack";
 import AuthStack from "./AuthStack";
 import { AuthContext } from "../context/AuthProvider";
