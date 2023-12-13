@@ -9,7 +9,15 @@ import React from "react";
 import { NO_IMAGE } from "../../const/Contants";
 import Rating from "../rating/Rating";
 import * as Icon from "react-native-feather";
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+
+export type RestaurantDish = {
+  id: number;
+  name: string;
+  price: string;
+  description?: string;
+  image?: ImageSourcePropType;
+};
 
 export type RestaurantCardProps = {
   id?: number;
@@ -19,6 +27,7 @@ export type RestaurantCardProps = {
   address?: string;
   rating?: number;
   description?: string;
+  dishes?: RestaurantDish[];
 };
 
 export default function RestaurantCard(item: RestaurantCardProps) {

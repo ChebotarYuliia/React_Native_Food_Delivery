@@ -6,6 +6,7 @@ import { NO_IMAGE } from "../const/Contants";
 import * as Icon from "react-native-feather";
 import { themeColors } from "../theme";
 import Rating from "../components/rating/Rating";
+import DishCard from "../components/dish-card/DishCard";
 
 export default function RestaurantScreen() {
   const navigation = useNavigation();
@@ -52,6 +53,22 @@ export default function RestaurantScreen() {
           </View>
 
           <Text className='text-gray-500 my-2 text-lg'>{item.description}</Text>
+        </View>
+
+        <View className='pb-10 bg-white'>
+          <Text className='px-4 py-4 text-2xl font-bold'>Menu</Text>
+          {item.dishes?.map((dish) => {
+            return (
+              <DishCard
+                key={dish.id}
+                id={dish.id}
+                name={dish.name}
+                description={dish.description}
+                price={+dish.price}
+                image={dish.image}
+              />
+            );
+          })}
         </View>
       </View>
     </ScrollView>
