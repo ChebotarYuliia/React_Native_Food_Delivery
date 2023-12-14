@@ -28,6 +28,7 @@ export type RestaurantCardProps = {
   rating?: number;
   description?: string;
   dishes?: RestaurantDish[];
+  filters?: number[];
 };
 
 export default function RestaurantCard(item: RestaurantCardProps) {

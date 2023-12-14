@@ -1,5 +1,5 @@
 import { View, Text, StatusBar, ScrollView } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { themeColors } from "../theme";
 import SubmitButton from "../components/form-elements/SubmitButton";
@@ -12,11 +12,26 @@ import {
 } from "../../temp/data";
 import Category from "../components/categories/Category";
 import RestaurantsRow from "../components/restaurants/RestaurantsRow";
-import RestaurantCard from "../components/restaurants/RestaurantCard";
+import RestaurantCard, {
+  RestaurantCardProps,
+} from "../components/restaurants/RestaurantCard";
 
 export default function HomeScreen() {
   const { logout } = useContext(AuthContext) as TAuthContext;
   const [activeCategory, setActiveCategory] = useState<number | null>(1);
+  const [filteredRetaurants, setFilteredRestaurants] =
+    useState<RestaurantCardProps[]>(tempRestaurants);
+
+  useEffect(() => {
+    if (activeCategory) {
+      const filtered = tempRestaurants.filter((res) => {
+        if (res.filters?.find((f) => f === activeCategory)) {
+          return true;
+        }
+      });
+      setFilteredRestaurants(filtered);
+    }
+  }, [activeCategory]);
 
   const handleSignout = async () => {
     logout();
@@ -33,7 +48,7 @@ export default function HomeScreen() {
       {/* main */}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        className='flex-column gap-4 px-3'
+        className='flex-column gap-4 px-3 min-h-screen'
       >
         <View className='flex items-center pt-4 text-center'>
           <Text className='text-lg'>Home Screen</Text>
@@ -56,13 +71,19 @@ export default function HomeScreen() {
 
         {tempRestaurantRows.map((row) => {
           const { restaurants, ...props } = row;
-          if (restaurants.length) {
+          let relevantRestaurants: RestaurantCardProps[] = [];
+          restaurants.map((res) =>
+            filteredRetaurants.find((r) => {
+              if (r.id === res) {
+                relevantRestaurants.push(r);
+              }
+            })
+          );
+          if (relevantRestaurants.length) {
             return (
               <RestaurantsRow {...props} key={row.id}>
-                {restaurants.map((res, i) => {
-                  const data = tempRestaurants.find((r) => r.id === res);
-
-                  return <RestaurantCard {...data} key={i} />;
+                {relevantRestaurants.map((res, i) => {
+                  return <RestaurantCard {...res} key={i} />;
                 })}
               </RestaurantsRow>
             );

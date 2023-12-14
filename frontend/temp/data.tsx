@@ -33,11 +33,6 @@ export const tempCategories: CategoryProps[] = [
     name: "Desserts",
     image: require("../assets/images/categories/cupcake.png"),
   },
-  {
-    id: 7,
-    name: "Cocktails",
-    image: require("../assets/images/categories/drink.png"),
-  },
 ];
 
 export const tempRestaurantRows: ({
@@ -51,15 +46,9 @@ export const tempRestaurantRows: ({
   },
   {
     id: 2,
-    title: "Soft and creamy",
-    description: "soft and tender fried chicken",
-    restaurants: [2, 3, 4],
-  },
-  {
-    id: 3,
     title: "Specials",
     description: "soft and tender fried chicken",
-    restaurants: [4, 1, 5],
+    restaurants: [4, 5],
   },
 ];
 
@@ -69,6 +58,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
     image: require("../assets/images/restaurants/1.jpg"),
     children: "Papa Johns",
     category: "Pizzeria",
+    filters: [2, 3],
     address: "5th Ave",
     rating: 4.55,
     description:
@@ -110,6 +100,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
     image: require("../assets/images/restaurants/2.jpg"),
     children: "Istanbul",
     category: "Fast food",
+    filters: [4],
     address: "4th Ave",
     rating: 3.7,
     description:
@@ -136,6 +127,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
     image: require("../assets/images/restaurants/3.jpg"),
     children: "Pan Asia",
     category: "Asian",
+    filters: [1, 5],
     address: "1st Ave",
     rating: 4.25,
     description:
@@ -169,6 +161,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
     image: require("../assets/images/restaurants/4.png"),
     children: "McDonalds",
     category: "Fast food",
+    filters: [4, 6],
     address: "2d Ave",
     rating: 5,
     description:
@@ -209,6 +202,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
     children: "Intourist",
     category: "Reastaurant",
     address: "6th Ave",
+    filters: [2, 5, 6],
     rating: 4,
     description: "",
     dishes: [
