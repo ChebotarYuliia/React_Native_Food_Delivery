@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import UserStack from "./UserStack";
 import AuthStack from "./AuthStack";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext, TAuthContext } from "../context/AuthProvider";
 import { View, ActivityIndicator } from "react-native";
 
 export default function Navigation() {
-  const { userToken, isLoading } = useContext(AuthContext);
+  const { userToken, isLoading } = useContext(AuthContext) as TAuthContext;
 
   if (isLoading) {
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
