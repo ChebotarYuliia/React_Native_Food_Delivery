@@ -1,34 +1,25 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { themeColors } from "../../theme";
 import { NO_IMAGE } from "../../const/Contants";
 import * as Icon from "react-native-feather";
+import { useDispatch } from "react-redux";
+import { RestaurantDish } from "../../../types/base";
+import { addToCart, removeFromCart } from "../../../slices/cartSlice";
 
 type DishCardProps = {
-  name: string;
-  description?: string;
-  id: number;
-  price: number;
-  image?: ImageSourcePropType;
+  dish: RestaurantDish;
 };
 
-export default function DishCard({
-  name,
-  description,
-  price,
-  image,
-}: DishCardProps) {
+export default function DishCard({ dish }: DishCardProps) {
+  const { name, description, price, image } = dish;
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
 
   const decreaseQuantity = () => {
     if (quantity !== 0) {
       setQuantity((s) => s - 1);
+      dispatch(removeFromCart(dish));
     } else {
       return;
     }
@@ -36,6 +27,7 @@ export default function DishCard({
 
   const increaseQuantity = () => {
     setQuantity((s) => s + 1);
+    dispatch(addToCart(dish));
   };
 
   return (

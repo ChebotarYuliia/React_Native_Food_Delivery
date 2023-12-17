@@ -1,37 +1,12 @@
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
+import { View, Text, TouchableWithoutFeedback, Image } from "react-native";
 import React from "react";
 import { NO_IMAGE } from "../../const/Contants";
 import Rating from "../rating/Rating";
 import * as Icon from "react-native-feather";
 import { useNavigation } from "@react-navigation/native";
+import { RestaurantCard as TRestaurantCard } from "../../../types/base";
 
-export type RestaurantDish = {
-  id: number;
-  name: string;
-  price: string;
-  description?: string;
-  image?: ImageSourcePropType;
-};
-
-export type RestaurantCardProps = {
-  id?: number;
-  children?: string; // title
-  image?: ImageSourcePropType;
-  category?: string;
-  address?: string;
-  rating?: number;
-  description?: string;
-  dishes?: RestaurantDish[];
-  filters?: number[];
-};
-
-export default function RestaurantCard(item: RestaurantCardProps) {
+export default function RestaurantCard(item: TRestaurantCard) {
   const navigation = useNavigation();
 
   return (

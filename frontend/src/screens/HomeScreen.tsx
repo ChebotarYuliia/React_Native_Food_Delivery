@@ -11,15 +11,14 @@ import {
 } from "../../temp/data";
 import Category from "../components/categories/Category";
 import RestaurantsRow from "../components/restaurants/RestaurantsRow";
-import RestaurantCard, {
-  RestaurantCardProps,
-} from "../components/restaurants/RestaurantCard";
+import RestaurantCard from "../components/restaurants/RestaurantCard";
+import { RestaurantCard as TRestaurantCard } from "../../types/base";
 
 export default function HomeScreen() {
   const { logout } = useContext(AuthContext) as TAuthContext;
   const [activeCategory, setActiveCategory] = useState<number | null>(1);
   const [filteredRetaurants, setFilteredRestaurants] =
-    useState<RestaurantCardProps[]>(tempRestaurants);
+    useState<TRestaurantCard[]>(tempRestaurants);
 
   useEffect(() => {
     if (activeCategory) {
@@ -71,7 +70,7 @@ export default function HomeScreen() {
 
         {tempRestaurantRows.map((row) => {
           const { restaurants, ...props } = row;
-          let relevantRestaurants: RestaurantCardProps[] = [];
+          let relevantRestaurants: TRestaurantCard[] = [];
           restaurants.map((res) =>
             filteredRetaurants.find((r) => {
               if (r.id === res) {

@@ -1,17 +1,27 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { RestaurantCardProps } from "../components/restaurants/RestaurantCard";
 import { NO_IMAGE } from "../const/Contants";
 import * as Icon from "react-native-feather";
 import { themeColors } from "../theme";
 import Rating from "../components/rating/Rating";
 import DishCard from "../components/dish-card/DishCard";
+import { RestaurantCard } from "../../types/base";
+import { useDispatch } from "react-redux";
+import { setRestaurant } from "../../slices/restaurantSlice";
 
 export default function RestaurantScreen() {
   const navigation = useNavigation();
   const { params } = useRoute();
-  const item = params as RestaurantCardProps;
+  const item = params as RestaurantCard;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (item && item.id) {
+      dispatch(setRestaurant(item));
+    }
+  }, [item]);
 
   return (
     <ScrollView>
@@ -55,19 +65,10 @@ export default function RestaurantScreen() {
           <Text className='text-gray-500 my-2 text-lg'>{item.description}</Text>
         </View>
 
-        <View className='pb-10 bg-white'>
+        <View className='pb-20 bg-white'>
           <Text className='px-4 py-4 text-2xl font-bold'>Menu</Text>
           {item.dishes?.map((dish) => {
-            return (
-              <DishCard
-                key={dish.id}
-                id={dish.id}
-                name={dish.name}
-                description={dish.description}
-                price={+dish.price}
-                image={dish.image}
-              />
-            );
+            return <DishCard key={dish.id} dish={dish} />;
           })}
         </View>
       </View>

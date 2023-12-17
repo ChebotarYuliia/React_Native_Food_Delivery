@@ -1,6 +1,6 @@
 import { CategoryProps } from "../src/components/categories/Category";
-import { RestaurantCardProps } from "../src/components/restaurants/RestaurantCard";
 import { RestaurantsRowProps } from "../src/components/restaurants/RestaurantsRow";
+import { RestaurantCard } from "../types/base";
 
 export const tempCategories: CategoryProps[] = [
   {
@@ -52,7 +52,7 @@ export const tempRestaurantRows: ({
   },
 ];
 
-export const tempRestaurants: RestaurantCardProps[] = [
+export const tempRestaurants: RestaurantCard[] = [
   {
     id: 1,
     image: require("../assets/images/restaurants/1.jpg"),
@@ -70,6 +70,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "3 types of Cheese, onion, tomato sause",
         image: require("../assets/images/dishes/1.jpeg"),
+        restaurantId: 1,
       },
       {
         id: 2,
@@ -78,6 +79,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         description:
           "2 types of Cheese, olives, mushrooms, onion, tomato sause",
         image: require("../assets/images/dishes/2.jpg"),
+        restaurantId: 1,
       },
       {
         id: 3,
@@ -85,6 +87,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "10",
         description: "3 types of Cheese, onion, tomato sause",
         image: require("../assets/images/dishes/3.jpeg"),
+        restaurantId: 1,
       },
       {
         id: 4,
@@ -92,6 +95,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "6",
         description: "Potato, oil, salt",
         image: require("../assets/images/dishes/4.jpeg"),
+        restaurantId: 1,
       },
     ],
   },
@@ -112,6 +116,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "Buns, Cheese, onion, cucumber, tomato sause",
         image: require("../assets/images/dishes/5.jpeg"),
+        restaurantId: 2,
       },
       {
         id: 2,
@@ -119,6 +124,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "10",
         description: "Chicken, Cheese, Salate, Onion, Cream sause",
         image: require("../assets/images/dishes/7.jpg"),
+        restaurantId: 2,
       },
     ],
   },
@@ -139,6 +145,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "12",
         description: "Chicken broth, Egg, beans, noodles",
         image: require("../assets/images/dishes/11.jpeg"),
+        restaurantId: 3,
       },
       {
         id: 2,
@@ -146,6 +153,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "Rice, beans, carrot, onion, soy sauce",
         image: require("../assets/images/dishes/12.jpeg"),
+        restaurantId: 3,
       },
       {
         id: 3,
@@ -153,6 +161,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "14",
         description: "Chicken, Cheese, Onion, Cream sause",
         image: require("../assets/images/dishes/13.jpeg"),
+        restaurantId: 3,
       },
     ],
   },
@@ -173,6 +182,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "Buns, Cheese, onion, cucumber, tomato sause",
         image: require("../assets/images/dishes/5.jpeg"),
+        restaurantId: 4,
       },
       {
         id: 2,
@@ -180,6 +190,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "12",
         description: "Buns, 3 types of Cheese, onion, cucumber, tomato sause",
         image: require("../assets/images/dishes/6.png"),
+        restaurantId: 4,
       },
       {
         id: 3,
@@ -187,6 +198,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "10",
         description: "Chicken, Cheese, Salate, Onion, Cream sause",
         image: require("../assets/images/dishes/7.jpg"),
+        restaurantId: 4,
       },
       {
         id: 4,
@@ -194,6 +206,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "Ice cream, cookies, caramel",
         image: require("../assets/images/dishes/8.png"),
+        restaurantId: 4,
       },
     ],
   },
@@ -212,6 +225,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "12",
         description: "Chicken broth, Egg, beans, noodles",
         image: require("../assets/images/dishes/11.jpeg"),
+        restaurantId: 5,
       },
       {
         id: 2,
@@ -219,6 +233,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "8",
         description: "Rice, beans, carrot, onion, soy sauce",
         image: require("../assets/images/dishes/12.jpeg"),
+        restaurantId: 5,
       },
       {
         id: 3,
@@ -226,6 +241,7 @@ export const tempRestaurants: RestaurantCardProps[] = [
         price: "14",
         description: "Chicken, Cheese, Onion, Cream sause",
         image: require("../assets/images/dishes/13.jpeg"),
+        restaurantId: 5,
       },
     ],
   },
