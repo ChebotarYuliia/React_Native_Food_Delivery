@@ -1,7 +1,6 @@
 import { View, Text, StatusBar, ScrollView } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { themeColors } from "../theme";
 import SubmitButton from "../components/form-elements/SubmitButton";
 import { AuthContext, TAuthContext } from "../context/AuthProvider";
 import Categories from "../components/categories/Categories";
@@ -41,19 +40,20 @@ export default function HomeScreen() {
     <SafeAreaView className='bg-white pb-6'>
       <StatusBar barStyle={"dark-content"} />
 
-      {/* <View style={{ backgroundColor: themeColors.bg_main() }}>
-        <SubmitButton text='Sign out' onPress={handleSignout} />
-      </View> */}
+      <View className='py-4 px-3 flex-row items-center relative'>
+        <Text className='text-lg text-center w-full'>Home Screen</Text>
+        <SubmitButton
+          className='rounded-3xl w-20 ml-auto absolute right-4'
+          text='Sign out'
+          onPress={handleSignout}
+        />
+      </View>
 
       {/* main */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         className='flex-column gap-4 px-3 min-h-screen'
       >
-        <View className='flex items-center pt-4 text-center'>
-          <Text className='text-lg'>Home Screen</Text>
-        </View>
-
         <View className='pb-3'>
           <ScrollView showsVerticalScrollIndicator={false}>
             <Categories>
