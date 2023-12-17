@@ -52,17 +52,24 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const login = async (email: string, password: string) => {
-    setIsLoading(true);
-    const user = await signInWithEmailAndPassword(auth, email, password);
-    if (user) {
-      const token = await user.user.getIdToken();
-      setUserToken(token);
-      AsyncStorage.setItem("userToken", token);
-      setIsLoading(false);
-      return { error: null };
-    } else {
+    const error = () => {
       setIsLoading(false);
       return { error: "Email or password is incorrect! Try again" };
+    };
+    setIsLoading(true);
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      if (user) {
+        const token = await user.user.getIdToken();
+        setUserToken(token);
+        AsyncStorage.setItem("userToken", token);
+        setIsLoading(false);
+        return { error: null };
+      } else {
+        return error();
+      }
+    } catch (err) {
+      return error();
     }
   };
 
