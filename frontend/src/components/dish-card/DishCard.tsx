@@ -1,20 +1,40 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
-import { themeColors } from "../../theme";
+import { View, Text, Image } from "react-native";
+import React, { useEffect, useState } from "react";
 import { NO_IMAGE } from "../../const/Contants";
-import * as Icon from "react-native-feather";
-import { useDispatch } from "react-redux";
-import { RestaurantDish } from "../../../types/base";
-import { addToCart, removeFromCart } from "../../../slices/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RestaurantCard, RestaurantDish } from "../../../types/base";
+import {
+  addToCart,
+  clearCart,
+  removeFromCart,
+} from "../../../slices/cartSlice";
+import { RootState } from "../../../store";
+import { DishControls } from "../dish-controls/DishControls";
+import { setRestaurant } from "../../../slices/restaurantSlice";
 
 type DishCardProps = {
   dish: RestaurantDish;
+  restaurant: RestaurantCard;
 };
 
-export default function DishCard({ dish }: DishCardProps) {
+export default function DishCard({
+  dish,
+  restaurant: restaurantProp,
+}: DishCardProps) {
+  const { items: cartItems } = useSelector((state: RootState) => state.cart);
+  const { restaurant: restaurantState } = useSelector(
+    (state: RootState) => state.resturant
+  );
   const { name, description, price, image } = dish;
   const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const inCart = cartItems.filter(
+      (i) => i.id === dish.id && i.restaurantId === dish.restaurantId
+    );
+    setQuantity(inCart.length);
+  }, [cartItems]);
 
   const decreaseQuantity = () => {
     if (quantity !== 0) {
@@ -27,6 +47,12 @@ export default function DishCard({ dish }: DishCardProps) {
 
   const increaseQuantity = () => {
     setQuantity((s) => s + 1);
+
+    // reset cart and update restaurant card if dished from another restaurant were added
+    if (restaurantState?.id !== restaurantProp.id) {
+      dispatch(setRestaurant(restaurantProp));
+      dispatch(clearCart());
+    }
     dispatch(addToCart(dish));
   };
 
@@ -45,32 +71,11 @@ export default function DishCard({ dish }: DishCardProps) {
         <View className='flex-row pl-3 justify-between items-center'>
           <Text className='text-gray-700 text-lg font-bold'>${price}</Text>
           <View className='flex-row items-center'>
-            <TouchableOpacity
-              onPress={decreaseQuantity}
-              className='p-1 rounded-full'
-              style={{ backgroundColor: themeColors.bg_main(1) }}
-            >
-              <Icon.Minus
-                strokeWidth={2}
-                height={20}
-                width={20}
-                stroke='white'
-              />
-            </TouchableOpacity>
+            <DishControls remove onPress={decreaseQuantity} />
+
             <Text className='px-3 w-8'>{quantity}</Text>
 
-            <TouchableOpacity
-              onPress={increaseQuantity}
-              className='p-1 rounded-full'
-              style={{ backgroundColor: themeColors.bg_main(1) }}
-            >
-              <Icon.Plus
-                strokeWidth={2}
-                height={20}
-                width={20}
-                stroke='white'
-              />
-            </TouchableOpacity>
+            <DishControls add onPress={increaseQuantity} />
           </View>
         </View>
       </View>

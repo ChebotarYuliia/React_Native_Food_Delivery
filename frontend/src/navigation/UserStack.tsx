@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/HomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RestaurantScreen from "../screens/RestaurantScreen";
-import CartWidget from "../components/cart-widget/CartWidget";
+import CartScreen from "../screens/CartScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +18,8 @@ export default function UserStack() {
       >
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Restaurant' component={RestaurantScreen} />
-        {/* <Stack.Screen name='Cart' component={CartScreen} /> */}
+        <Stack.Screen name='Cart' component={CartScreen} />
       </Stack.Navigator>
-      <CartWidget />
     </NavigationContainer>
   );
 }
